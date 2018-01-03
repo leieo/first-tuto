@@ -7,8 +7,15 @@
 
   	<div id="vue-instance">
   		<!-- this will be the DOM element we will mount our VueJs instance to -->
-  		Enter your name : <input type="text" v-model="name">
-  		<button @click="sayHello">Hey there!</button>
+  		<div v-show="isLoggedIn">
+  			Welcome to you!
+  			<button @click="login" type="submit">Logout</button>
+  		</div>
+  		<div v-else>
+  			<input type="text" placeholder="username">
+  			<input type="password" placeholder="password">
+  			<button @click="login" type="submit">Login</button>
+  		</div>
   	</div>
 
   <script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
@@ -18,11 +25,11 @@
   	var vm = new Vue({
   		el: '#vue-instance',
   		data: {
-  			name: ''
+  			isLoggedIn: false
   		},
   		methods: {
-  			sayHello: function(){
-  				alert('Hey there, ' + this.name);
+  			login: function(){
+  				this.isLoggedIn = !this.isLoggedIn;
   			}
   		}
   	});
